@@ -124,21 +124,17 @@
     return localFullOK ? it.full : REMOTE_BASE + it.id + ".png";
   }
   function probeFull() {
-    /* assets/full 可能没随仓库分发（4.5 GB），探一下再决定下载按钮指向哪里 */
-    if (location.protocol.indexOf("http") !== 0 || !BUILTIN.length) return;
-    fetch("assets/full/" + BUILTIN[0].id + ".png", { method: "HEAD" }).then(function (r) {
+    /* assets/full 可能没随仓库分发（4.5 GB），探一下再决定下载按钮指向哪里。
+       首屏渲染会等这个结果（最多 800ms），避免先按本地路径画一遍再改，下载时 404。 */
+    if (location.protocol.indexOf("http") !== 0 || !BUILTIN.length) return Promise.resolve();
+    var probe = fetch("assets/full/" + BUILTIN[0].id + ".png", { method: "HEAD" }).then(function (r) {
       if (!r.ok) throw new Error("missing");
     }).catch(function () {
       localFullOK = false;
-      /* 探测是异步的，首屏卡片可能已经渲染出来了，这里就地把链接改掉 */
-      $$(".card").forEach(function (li) {
-        var a = li.querySelector(".dl");
-        if (a && li.dataset.id) a.href = REMOTE_BASE + li.dataset.id + ".png";
-      });
       var dl = $("#lb-download");
       if (dl) dl.textContent = "下载原图（原站）";
-      if (lbIndex >= 0) renderLb();
     });
+    return Promise.race([probe, new Promise(function (res) { setTimeout(res, 800); })]);
   }
 
   function lenName(l) { return LENS[l] || "未分类"; }
@@ -1099,12 +1095,13 @@
 
     renderHero();
     renderRanking();
-    probeFull();
-    setSection("face");
 
-    mergeLocal().then(function () {
-      buildFilters();
-      applyFilters();
+    probeFull().then(function () {
+      setSection("face");
+      mergeLocal().then(function () {
+        buildFilters();
+        applyFilters();
+      });
     });
   }
 
