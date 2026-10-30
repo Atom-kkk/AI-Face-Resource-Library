@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>AI 模特人脸参考库 · 1499 张 CC0 人脸素材</title>
+<meta name="description" content="用于 AI 绘画与视频制作统一角色长相的人脸参考图集：893 张正面人脸 + 606 张造型图，全部本地化、CC0 可自由使用，支持搜索、收藏、上传与一键生成人像提示词。">
+<meta name="author" content="中文版：Atom-kkk｜原图库：あぎ @agi_aibusi">
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap topbar">
+    <a class="brand" href="./" aria-label="返回首页">
+      <span class="brand-mark" aria-hidden="true">F</span>
+      <span class="brand-text">FACE&nbsp;REFERENCE<small>AI 模特脸参考库</small></span>
+    </a>
+    <nav class="nav" aria-label="主导航">
+      <button type="button" class="tlink" data-open="dlg-help">使用说明</button>
+      <button type="button" class="tlink hide-sm" data-open="dlg-notice">授权说明</button>
+      <button type="button" class="pill hide-sm" data-open="dlg-ai">AI 设置</button>
+      <button type="button" class="pill solid" data-open="dlg-upload">＋ 上传我的图</button>
+      <button type="button" class="icon-btn" id="theme-btn" aria-label="切换深浅色主题" title="切换深浅色主题">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"/></svg>
+      </button>
+    </nav>
+  </div>
+
+  <section class="wrap hero">
+    <div class="hero-copy">
+      <p class="eyebrow"><span>Free Face Reference Library</span></p>
+      <h1>AI 模特<br>人脸参考库<em>FACE&nbsp;DATABASE</em></h1>
+      <p class="lead">
+        为 AI 绘画与视频制作<b>统一角色长相</b>的人脸参考图集。正面、纯色背景的「人脸」，以及带服装与氛围的「造型」，
+        共 <b>1499 张</b>，CC0 可自由使用 —— 图片已全部本地化，断网也能翻。
+      </p>
+      <dl class="stats">
+        <div><dt>正面人脸</dt><dd id="stat-face">—</dd></div>
+        <div><dt>造型</dt><dd id="stat-styling">—</dd></div>
+        <div><dt>授权</dt><dd>CC0</dd></div>
+      </dl>
+      <div class="cta-row">
+        <a class="cta" href="#gallery">看图库<span aria-hidden="true">→</span></a>
+        <button type="button" class="cta ghost" data-open="dlg-upload">上传我自己的脸</button>
+      </div>
+      <p class="lead" style="margin-top:18px;font-size:.8rem">原站只有日文界面、图片走外链；这一版做了全站汉化、素材全本地、搜索 / 收藏 / 上传 / AI 提示词，双击 <code>index.html</code> 就能用。</p>
+    </div>
+    <div id="hero-faces" class="hero-faces" aria-hidden="true"></div>
+  </section>
+</header>
+
+<main class="wrap" id="gallery">
+
+  <section id="ranking" class="ranking" aria-labelledby="ranking-title" hidden>
+    <div class="ranking-head">
+      <h2 class="section-title" id="ranking-title">Trending<span>热门 Top 10</span></h2>
+      <p class="rank-note" id="rank-note" style="margin:0"></p>
+    </div>
+    <div id="rank-tabs" class="rank-tabs" role="tablist" aria-label="榜单分类"></div>
+    <ol id="rank-list" class="rank-list" role="tabpanel" aria-labelledby="ranking-title"></ol>
+  </section>
+
+  <div class="toolbar">
+    <div class="tb-row tb-head">
+      <h2 class="section-title">Gallery<span>按发长与风格筛选</span></h2>
+      <p id="count" class="count" aria-live="polite"></p>
+    </div>
+
+    <div class="tb-row">
+      <div class="search" id="search-wrap">
+        <svg class="mag" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5" stroke-linecap="round"/></svg>
+        <input id="search" type="search" placeholder="搜索编号、发型、发色，如：短发 空气刘海" autocomplete="off" aria-label="搜索">
+        <button type="button" class="clear" id="search-clear" aria-label="清空搜索">×</button>
+      </div>
+      <div id="sections" class="sections" role="tablist" aria-label="图库分区">
+        <button type="button" class="seg" role="tab" data-sec="face" id="tab-face" aria-controls="grid"><span class="seg-en">Face</span>正面人脸<small id="n-face"></small></button>
+        <button type="button" class="seg" role="tab" data-sec="styling" id="tab-styling" aria-controls="grid"><span class="seg-en">Styling</span>造型<small id="n-styling"></small></button>
+        <button type="button" class="seg" role="tab" data-sec="fav" id="tab-fav" aria-controls="grid"><span class="seg-en">Saved</span>收藏<small id="n-fav"></small></button>
+      </div>
+      <div class="tb-right">
+        <select class="sort" id="sort" aria-label="排序方式">
+          <option value="default">默认顺序</option>
+          <option value="id">按编号</option>
+          <option value="size">按文件大小</option>
+          <option value="new">最近上传优先</option>
+        </select>
+        <button type="button" class="ghost-btn" id="random-btn" title="随机挑一张">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M16 3h5v5M21 3l-7.5 7.5M8 21H3v-5M3 21l7.5-7.5M21 16v5h-5M14 14l7 7M3 3l6.5 6.5"/></svg>
+          随机
+        </button>
+      </div>
+    </div>
+
+    <p id="sec-note" class="count" style="opacity:.8"></p>
+    <div id="filters" class="chips" role="group" aria-label="按发长筛选"></div>
+    <div id="tags" class="chips" role="group" aria-label="按风格快筛"></div>
+  </div>
+
+  <ul id="grid" class="grid"></ul>
+  <p id="empty" class="empty" hidden></p>
+  <div class="more-wrap">
+    <button id="more" class="btn" type="button" hidden>加载更多</button>
+  </div>
+  <div id="sentinel" aria-hidden="true"></div>
+
+  <section class="notes">
+    <div class="note-card" id="tips">
+      <h2>使用技巧</h2>
+      <ul>
+        <li>把图片放进各类 AI 工具的「角色参考 / 人脸参考 / IP-Adapter」里，就能固定同一个人的长相。</li>
+        <li>要统一脸，选<b>正面人脸</b>；要参考服装质感、发型细节和整体氛围，选<b>造型</b>。</li>
+        <li>连续用同一张图当参考，出图与出视频的脸会更稳；换角度时优先换同一编号的造型图。</li>
+        <li>下载原图（PNG）再喂给模型，细节比缩略图清楚得多。</li>
+        <li>点开任意一张，右侧可以一键生成英文人像提示词，配合参考图一起用效果最好。</li>
+      </ul>
+    </div>
+    <div class="note-card" id="rules">
+      <h2>授权与来源</h2>
+      <ul>
+        <li>原图库以 <b>CC0 1.0</b> 发布：可商用、可修改、可作参考，无需署名。</li>
+        <li>画面中的人物均为 AI 生成的虚构人物，与真实人物无关。</li>
+        <li>不得用于冒充真实人物，或违反公序良俗的用途。</li>
+        <li>请勿把图片本体打包转售、二次分发。</li>
+      </ul>
+      <p>
+        CC0 1.0 说明：<a href="https://creativecommons.org/publicdomain/zero/1.0/deed.zh" target="_blank" rel="noopener">creativecommons.org</a><br>
+        原作者：あぎ（<a href="https://x.com/agi_aibusi" target="_blank" rel="noopener">@agi_aibusi</a>）｜原站：<a href="https://ai-portrait-gallery.pages.dev/" target="_blank" rel="noopener">AIモデル顔データベース</a>
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>中文版 · 素材全本地 · 零依赖零构建</span>
+    <span>／</span>
+    <a href="https://x.com/agi_aibusi" target="_blank" rel="noopener">原作者：あぎ</a>
+    <span>／</span>
+    <a href="https://ai-portrait-gallery.pages.dev/" target="_blank" rel="noopener">原图库</a>
+    <span>／ CC0 1.0</span>
+    <span style="margin-left:auto">共 <b id="stat-total">1499</b> 张 · <span id="stat-local">0</span> 张本地上传</span>
+  </div>
+</footer>
+
+<!-- ============ 灯箱 ============ -->
+<div id="lb" class="lb" role="dialog" aria-modal="true" aria-label="图片详情" hidden>
+  <div class="lb-stage">
+    <img id="lb-img" alt="">
+    <button class="lb-btn lb-close" id="lb-close" type="button" aria-label="关闭">×</button>
+    <button class="lb-btn lb-prev" id="lb-prev" type="button" aria-label="上一张">‹</button>
+    <button class="lb-btn lb-next" id="lb-next" type="button" aria-label="下一张">›</button>
+  </div>
+  <aside class="lb-side">
+    <h2 id="lb-id">—<small id="lb-sub"></small></h2>
+    <dl class="lb-dl">
+      <dt>分区</dt><dd id="lb-sec">—</dd>
+      <dt>发长</dt><dd id="lb-len">—</dd>
+      <dt>风格</dt><dd id="lb-sty">—</dd>
+      <dt>尺寸</dt><dd id="lb-size">—</dd>
+      <dt>原图</dt><dd id="lb-bytes">—</dd>
+    </dl>
+    <div class="lb-actions">
+      <a class="cta" id="lb-download" href="#" download>下载原图（PNG）</a>
+      <button class="ghost-btn" id="lb-fav" type="button" aria-pressed="false">☆ 收藏</button>
+      <button class="ghost-btn" id="lb-copy" type="button">复制编号</button>
+      <button class="ghost-btn" id="lb-del" type="button" hidden>删除这张</button>
+    </div>
+    <div class="ai-box">
+      <header>
+        <h3>AI 人像提示词</h3>
+        <button class="ghost-btn" id="lb-gen" type="button">生成</button>
+      </header>
+      <textarea id="lb-prompt" placeholder="点「生成」按这张图的发长与风格写一条英文提示词，也可以自己改。"></textarea>
+      <p class="ai-hint" id="lb-ai-hint">需先在「AI 设置」填 DeepSeek API Key。提示词只存在本机浏览器。</p>
+      <div class="lb-actions">
+        <button class="ghost-btn" id="lb-copy-prompt" type="button">复制提示词</button>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<!-- ============ 使用说明 ============ -->
+<dialog class="sheet" id="dlg-help">
+  <div class="sheet-hd"><h2>使用说明</h2><button class="close-x" type="button" data-close aria-label="关闭">×</button></div>
+  <div class="sheet-bd">
+    <ol>
+      <li><b>找图</b>：顶部搜索框支持编号（如 <code>f71f980</code>）、发长（短发 / 中短发 / 中长发 / 长发）与风格关键词（如 空气刘海、狼尾、挑染、米色），多个词用空格分隔表示「同时满足」。</li>
+      <li><b>分区</b>：<b>正面人脸</b> 893 张，正面且纯色背景，最适合固定长相；<b>造型</b> 606 张，带服装与完整氛围，角度各异；<b>收藏</b> 是你自己点星标存下来的图。</li>
+      <li><b>快筛</b>：发长下面那排虚线标签是风格关键词，点一下按「风格 + 发长」叠加筛选，再点一次取消。</li>
+      <li><b>放大</b>：点任意一张图进入详情，<kbd>←</kbd> <kbd>→</kbd> 切换、<kbd>Esc</kbd> 关闭，手机上左右滑动。</li>
+      <li><b>下载</b>：卡片右下角的「PNG」或详情里的「下载原图」，拿到的都是本地 1122×1402 / 1597×2000 左右的原尺寸 PNG，不是缩略图。</li>
+      <li><b>上传自己的图</b>：点顶部「＋ 上传我的图」，拖拽或多选，每张都要选发长、填风格，否则存不进去。编号自动从 <code>M-0001</code> 起，图片只存在你自己的浏览器里。</li>
+      <li><b>AI 提示词</b>：在「AI 设置」填好 DeepSeek API Key 后，点开图片 → 右侧「AI 人像提示词」→「生成」，会按这张图的发长与风格写一条英文提示词，可编辑、可复制、自动保存。</li>
+      <li><b>主题</b>：右上角太阳图标切换深浅色，默认跟随系统。</li>
+    </ol>
+    <h3>关于素材</h3>
+    <ul>
+      <li>共 1499 张，其中正面人脸 893 张、造型 606 张，全部为 AI 生成的虚构人物。</li>
+      <li>所有图片（缩略图 WebP + 原图 PNG）都已随项目落地到 <code>assets/</code>，不依赖任何 CDN。</li>
+      <li>原图库由 あぎ（@agi_aibusi）以 CC0 1.0 发布，可自由使用。</li>
+    </ul>
+  </div>
+</dialog>
+
+<!-- ============ 授权说明 ============ -->
+<dialog class="sheet" id="dlg-notice">
+  <div class="sheet-hd"><h2>授权与注意事项</h2><button class="close-x" type="button" data-close aria-label="关闭">×</button></div>
+  <div class="sheet-bd">
+    <ul>
+      <li>图片以 <b>CC0 1.0</b> 发布，可商用、可编辑、可作参考，署名非必需。</li>
+      <li>画面人物为 AI 生成的虚构人物，不存在对应真人。</li>
+      <li>不得用于冒充真实人物、伪造身份或违反公序良俗的用途。</li>
+      <li>请勿把图片数据本体打包转售或二次分发。</li>
+      <li>本项目代码以 MIT 授权，该授权<b>不覆盖</b> <code>assets/</code> 内的图片。</li>
+    </ul>
+    <h3>内容提示</h3>
+    <p style="font-size:.86rem;color:var(--muted);line-height:1.95">
+      图库为 AI 生成的人像素材，不含真实人物信息。请在遵守所在地法律法规与平台规则的前提下使用。
+    </p>
+    <h3>致谢</h3>
+    <p style="font-size:.86rem;color:var(--muted);line-height:1.95">
+      原图库：<a href="https://ai-portrait-gallery.pages.dev/" target="_blank" rel="noopener">AIモデル顔データベース</a>（作者 あぎ ·
+      <a href="https://x.com/agi_aibusi" target="_blank" rel="noopener">@agi_aibusi</a>）。
+      本汉化版仅做界面汉化、素材本地化与功能增强，对图片不主张任何权利。
+    </p>
+  </div>
+</dialog>
+
+<!-- ============ 上传 ============ -->
+<dialog class="sheet" id="dlg-upload">
+  <div class="sheet-hd"><h2>上传我自己的脸</h2><button class="close-x" type="button" data-close aria-label="关闭">×</button></div>
+  <div class="sheet-bd">
+    <div class="drop" id="drop">
+      <b>把图片拖进来</b>，或点击选择文件<br>
+      <span style="font-size:.76rem">支持 JPG / PNG / WebP，可多选。图片只保存在本机浏览器，不会上传到任何服务器。</span>
+      <input type="file" id="file-input" accept="image/*" multiple hidden>
+    </div>
+    <div class="up-list" id="up-list"></div>
+    <p class="ai-hint" style="margin-top:14px">每张都要选发长 + 填风格（如「空气刘海 黑发」），否则无法保存。编号从 M-0001 自动续号。</p>
+  </div>
+  <div class="sheet-foot">
+    <button class="btn" type="button" data-close>取消</button>
+    <button class="cta" type="button" id="up-save">保存到我的图库</button>
+  </div>
+</dialog>
+
+<!-- ============ AI 设置 ============ -->
+<dialog class="sheet" id="dlg-ai">
+  <div class="sheet-hd"><h2>AI 提示词设置</h2><button class="close-x" type="button" data-close aria-label="关闭">×</button></div>
+  <div class="sheet-bd">
+    <div class="field">
+      <label for="ai-key">DeepSeek API Key</label>
+      <input id="ai-key" type="password" placeholder="sk-..." autocomplete="off">
+      <span class="tip">在 <a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener">platform.deepseek.com</a> 申请。Key 只存在本机 localStorage，公共电脑上别填。</span>
+    </div>
+    <div class="field">
+      <label for="ai-base">接口地址</label>
+      <input id="ai-base" type="text" placeholder="https://api.deepseek.com">
+      <span class="tip">OpenAI 兼容接口，实际请求 <code>/chat/completions</code>。</span>
+    </div>
+    <div class="field">
+      <label for="ai-model">模型</label>
+      <input id="ai-model" type="text" placeholder="deepseek-chat">
+    </div>
+    <div class="field">
+      <label for="ai-tpl">提示词模板（system prompt）</label>
+      <textarea id="ai-tpl" spellcheck="false"></textarea>
+      <span class="tip">想固定自己的出图风格，直接改这段模板。用 <code>{{len}}</code> 和 <code>{{style}}</code> 占位。</span>
+    </div>
+  </div>
+  <div class="sheet-foot">
+    <button class="btn" type="button" id="ai-test">测试连接</button>
+    <button class="cta" type="button" id="ai-save">保存设置</button>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
