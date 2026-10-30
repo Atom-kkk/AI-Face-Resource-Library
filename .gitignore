@@ -1,6 +1,7 @@
 # 4.53 GB 原图，不随仓库分发（见 README「原图怎么补回来」）
 assets/full/
 
+_site/
 .DS_Store
 Thumbs.db
 *.log
