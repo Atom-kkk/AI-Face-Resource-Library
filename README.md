@@ -2,6 +2,7 @@
 
 > 1499 张 AI 人脸参考图的**纯静态**图库：零依赖、零构建，可完全离线运行，支持搜索、收藏、上传自己的图与一键生成人像提示词。
 
+**在线演示：** <https://atom-kkk.github.io/AI-Face-Resource-Library/>
 **原图库：** <https://ai-portrait-gallery.pages.dev/>（`AIモデル顔データベース`）
 **PNG 原图打包：** <https://pan.quark.cn/s/3c15a8a8a96f>（1499 张 1122×1402 / 1597×2000 无损，无需提取码）
 **原作者：** あぎ · [@agi_aibusi](https://x.com/agi_aibusi)
@@ -161,7 +162,7 @@ python3 -m http.server 8080
 | 平台 | 做法 |
 | --- | --- |
 | 任意静态托管 | 上传全部文件，入口 `index.html` |
-| GitHub Pages | Settings → Pages → 分支 `main` / 根目录（注意 4.5 GB 的 `assets/full` 不要提交） |
+| GitHub Pages | 已配好：`.github/workflows/pages.yml` 推送 `main` 即自动部署（`build_type: workflow`） |
 | Cloudflare Pages / Vercel / Netlify | 构建命令留空，输出目录 `/` |
 | 内网 / NAS | 放进 Web 目录即可 |
 
@@ -239,3 +240,4 @@ Key 无效或余额不足；重新填一份，再点「测试连接」。
 - **2026-10** 新增上传自己的图（IndexedDB，`file://` 下自动降级 localStorage）
 - **2026-10** 接入 DeepSeek 生成人像提示词；卡片增加 `AI` 角标
 - **2026-10** 新增深浅色切换、原图缺失时自动回退原站下载
+- **2026-10** 接入 GitHub Actions 自动部署 Pages：<https://atom-kkk.github.io/AI-Face-Resource-Library/>

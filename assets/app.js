@@ -130,8 +130,14 @@
       if (!r.ok) throw new Error("missing");
     }).catch(function () {
       localFullOK = false;
+      /* 探测是异步的，首屏卡片可能已经渲染出来了，这里就地把链接改掉 */
+      $$(".card").forEach(function (li) {
+        var a = li.querySelector(".dl");
+        if (a && li.dataset.id) a.href = REMOTE_BASE + li.dataset.id + ".png";
+      });
       var dl = $("#lb-download");
       if (dl) dl.textContent = "下载原图（原站）";
+      if (lbIndex >= 0) renderLb();
     });
   }
 
